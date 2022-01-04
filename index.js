@@ -51,7 +51,7 @@ const p = port|| 3000;
    log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Not a valid port`);
    log(chalk.yellow(`[📡 simple-website-pinger] `) + `Started on port 3000 instead`);
     
-    const p = port|| 3000;
+    const p = 3000;
     
  app.get('*', (req, res) => {
 res.status(status).send(`${words}`);
