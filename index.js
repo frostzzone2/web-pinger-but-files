@@ -4,16 +4,17 @@ const app = express()
 const chalk = require('chalk');
 const log = console.log;
 
-const ping = async function(url, interval, logs) {
+const ping = async function(url, interval, logs, name) {
+  let nick = name || `pinger`
   if (logs == false) {
   clog = false
   }else{
   clog = true
   }
 if (clog == true){
-log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `Logging pings`);
+log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` Logging pings for `+ chalk.blue(nick));
 }else{
-log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `NOT Logging pings`);
+log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` NOT Logging pings`+ chalk.blue(nick));
 }
 if(!url) return log(chalk.red(`[📡 simple-website-pinger] Error: `) + `You must specify URL!`);
 
