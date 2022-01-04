@@ -4,11 +4,12 @@ const app = express()
 const chalk = require('chalk');
 const log = console.log;
 
-const logs = async function(type){
-let clog = console || true
-}
-const ping = async function(url, interval) {
-  
+const ping = async function(url, interval, logs) {
+  if (logs == false) {
+  clog = false
+  }else{
+  clog = true
+  }
 if (clog == true){
 log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `Logging pings`);
 }else{
@@ -89,7 +90,6 @@ log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on po
 
 
 module.exports = {
-logs,
 ping,
 webserver
 }
