@@ -48,8 +48,8 @@ const words = text|| '<code>📡 This project is using <a href="https://www.npmj
 const p = port|| 3000;
 
   if (isNaN(p)){
-   logchalk.red(`[📡 simple-website-pinger] Error: `) + `Not a valid port`);
-   logchalk.yellow(`[📡 simple-website-pinger] `) + `Started on port 3000 instead`);
+   log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Not a valid port`);
+   log(chalk.yellow(`[📡 simple-website-pinger] `) + `Started on port 3000 instead`);
     
     const p = port|| 3000;
     
