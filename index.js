@@ -42,10 +42,11 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
 }
 
 
-const webserver =  async function(port) {
+const webserver =  async function(text, port) {
 let status = 200 
+const words = text|| <code>📡 This project is using <a href="https://www.npmjs.com/package/simple-website-pinger">simple-website-pinger</a> NPM package.</code>;
 app.get('*', (req, res) => {
-    res.status(status).send(`<code>📡 This project is using <a href="https://www.npmjs.com/package/simple-website-pinger">simple-website-pinger</a> NPM package.</code>`);
+    res.status(status).send(`${words}`);
 });
 const p = port|| 3000;
   
