@@ -4,9 +4,11 @@ const app = express()
 const chalk = require('chalk');
 const log = console.log;
 
-
-const ping = async function(url, interval, console) {
-  let clog = console || true
+const logs = async function(type){
+let clog = console || true
+}
+const ping = async function(url, interval) {
+  
 if (clog == true){
 log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `Logging pings`);
 }else{
