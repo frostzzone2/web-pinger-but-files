@@ -14,7 +14,7 @@ const ping = async function(url, interval, logs, name) {
 if (clog == true){
 log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` Logging pings for `+ chalk.blue(nick));
 }else{
-log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` NOT Logging pings`+ chalk.blue(nick));
+log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` NOT Logging pings `+ chalk.blue(nick));
 }
 if(!url) return log(chalk.red(`[📡 simple-website-pinger] Error: `) + `You must specify URL!`);
 
