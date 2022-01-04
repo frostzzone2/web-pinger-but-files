@@ -48,7 +48,18 @@ const words = text|| '<code>📡 This project is using <a href="https://www.npmj
 const p = port|| 3000;
 
   if (isNaN(p)){
-     log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Did not start server\nNot a valid port!`);
+   logchalk.red(`[📡 simple-website-pinger] Error: `) + `Not a valid port`);
+   logchalk.yellow(`[📡 simple-website-pinger] `) + `Started on port 3000 instead`);
+    
+    const p = port|| 3000;
+    
+ app.get('*', (req, res) => {
+res.status(status).send(`${words}`);
+});
+    
+app.listen(p, () => {
+log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on port ${p}!`);
+});
   }else{
 app.get('*', (req, res) => {
 res.status(status).send(`${words}`);
