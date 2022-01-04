@@ -89,6 +89,7 @@ log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on po
 
 
 module.exports = {
+logs,
 ping,
 webserver
 }
