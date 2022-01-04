@@ -7,7 +7,7 @@ const log = console.log;
 
 const ping = async function(url, interval, console) {
   let clog = console || true
-if (clog ==true){
+if (clog == true){
 log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `Logging pings`);
 }else{
 log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `NOT Logging pings`);
