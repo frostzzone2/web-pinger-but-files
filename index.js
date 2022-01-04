@@ -68,19 +68,28 @@ const p = port|| 3000;
    log(chalk.yellow(`[📡 simple-website-pinger] `) + `Started on port 3000 instead`);
     
     const p = 3000;
-    
+    if (words.includes(".html")){
+    app.get('*', function(req, res){
+  res.sendFile(`${words}`);
+});
+    }else{
  app.get('*', (req, res) => {
 res.status(status).send(`${words}`);
 });
-    
+    }
 app.listen(p, () => {
 log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on port ${p}!`);
 });
   }else{
+    if (words.includes(".html")){
+    app.get('*', function(req, res){
+  res.sendFile(`${words}`);
+});
+    }else{
 app.get('*', (req, res) => {
 res.status(status).send(`${words}`);
 });
-    
+    }
 app.listen(p, () => {
 log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on port ${p}!`);
 });
