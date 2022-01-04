@@ -4,6 +4,39 @@ const app = express()
 const chalk = require('chalk');
 const log = console.log;
 
+const pong = async function(url, interval) {
+  if(!url) return
+  
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+    } catch (_) {
+      return false;  
+    }
+
+    return true;
+  }
+
+  if(isValidUrl(url) !== true || url.includes("<" || ">" || "<script>" || "</script>") || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) return;
+
+
+let int = interval || 60000
+
+setInterval(async () => {
+    const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+      
+    });
+      
+
+    status = response.status;
+}, int);
+
+const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+      
+    });
+      
+    status = response.status;
+  }
 const ping = async function(url, interval, logs, name) {
   let nick = name || `pinger`
   if (logs == false) {
@@ -92,6 +125,7 @@ log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on po
 
 
 module.exports = {
+pong,
 ping,
 webserver
 }
