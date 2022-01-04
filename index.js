@@ -45,14 +45,19 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
 const webserver =  async function(port, text) {
 let status = 200 
 const words = text|| '<code>📡 This project is using <a href="https://www.npmjs.com/package/simple-website-pinger">simple-website-pinger</a> NPM package.</code>';
-app.get('*', (req, res) => {
-    res.status(status).send(`${words}`);
-});
 const p = port|| 3000;
-  
+
+  if (isNaN(p)){
+     log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Did not start server\nNot a valid port!`);
+  }else{
+app.get('*', (req, res) => {
+res.status(status).send(`${words}`);
+});
+    
 app.listen(p, () => {
 log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on port ${p}!`);
 });
+    }
 }
 
 
