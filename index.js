@@ -5,7 +5,13 @@ const chalk = require('chalk');
 const log = console.log;
 
 
-const ping = async function(url, interval) {
+const ping = async function(url, interval, console) {
+  let clog = console || true
+if (clog ==true){
+log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `Logging pings`);
+}else{
+log(chalk.gray.bgWhite(`[📡 simple-website-pinger] `) + `NOT Logging pings`);
+}
 if(!url) return log(chalk.red(`[📡 simple-website-pinger] Error: `) + `You must specify URL!`);
 
   function isValidUrl(string) {
@@ -20,22 +26,28 @@ if(!url) return log(chalk.red(`[📡 simple-website-pinger] Error: `) + `You mus
 
   if(isValidUrl(url) !== true || url.includes("<" || ">" || "<script>" || "</script>") || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) return log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Invalid URL (${url})!`);
 
-
 let int = interval || 60000
 
 setInterval(async () => {
     const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+     if(clog == true){
       log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Failed to ping ${url}: ${err}`);
+       }
     });
+  if(clog == true){
       log(chalk.green(`[📡 simple-website-pinger] `) + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`);
-
+}
     status = response.status;
 }, int);
 
 const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+  if(clog == true){
       log(chalk.red(`[📡 simple-website-pinger] Error: `) + `Failed to ping ${url}: ${err}`);
+    }
     });
+  if(clog == true){
       log(chalk.green(`[📡 simple-website-pinger] `) + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`);
+    }
 
     status = response.status;
 
