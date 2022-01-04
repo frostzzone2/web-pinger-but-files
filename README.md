@@ -36,5 +36,5 @@ pinger.ping("Your project url") //default interval is 1m, or you can specify own
 | Methods       | Type           | Required      | Default    | Description |
 | ------------- |:-------------:|:-------------:|:-------------:| :--------------:|
 | ping("Your url", your interval in ms)     | String, Object | true, false | *None,  60000* | Start to ping the provided url every provided time |
-| webserver(your port, 'html code')     | Object | false | 3000 | Create simple websever for your project, to make it pingable |
+| webserver(your port, 'html code')     | Object | false,false | 3000 | Create simple websever for your project, to make it pingable |
 
