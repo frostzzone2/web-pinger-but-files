@@ -1,6 +1,6 @@
 {
   "name": "simple-website-pinger",
-  "version": "3.0.14.1",
+  "version": "3.0.14.2",
   "description": "Simple website pinger, you can use it to keep your repl.it or similiar projects online for 24/7!",
   "main": "index.js",
   "scripts": {
