@@ -1,5 +1,4 @@
-const { Client, Intents } = require("discord.js")
-const client = new Client({ intents: [Intents.FLAGS.GUILDS], partials: ["CHANNEL"] })
+const Discord = require("discord.js")
 const fetch = require("node-fetch")
 const express = require("express")
 const app = express()
@@ -93,7 +92,9 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
 
 }
 
-const pingd = async function(channelid, url, interval, name) {
+const pingd = async function(client, channelid, url, interval, name) {
+  if(!client) return log(chalk.red(`ERROR: `) +"Client not provided")
+bot = client
   let nick = name || `pinger`
   let id = channelid
   if (isNaN(id)) {
@@ -102,7 +103,7 @@ const pingd = async function(channelid, url, interval, name) {
   }
   clog = true
   
-if(!url) return client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `invalid URL supplied [`+ url +`]`)});
+if(!url) return bot.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `invalid URL supplied [`+ url +`]`)});
 
   function isValidUrl(string) {
     try {
@@ -121,22 +122,22 @@ let int = interval || 60000
 setInterval(async () => {
     const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
      if(clog == true){
-      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
+      bot.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
        }
     });
   if(clog == true){
-      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
+      bot.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
 }
     status = response.status;
 }, int);
 
 const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
   if(clog == true){
-      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
+      bot.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
     }
     });
   if(clog == true){
-      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
+      bot.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
     }
 
     status = response.status;
