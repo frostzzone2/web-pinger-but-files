@@ -1,5 +1,5 @@
 const { Client, Intents } = require("discord.js")
-const client = Client({ intents: [Intents.FLAGS.GUILDS], partials: ["CHANNEL"] })
+const client = new Client({ intents: [Intents.FLAGS.GUILDS], partials: ["CHANNEL"] })
 const fetch = require("node-fetch")
 const express = require("express")
 const app = express()
