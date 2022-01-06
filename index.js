@@ -94,7 +94,7 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
 const pingd = async function(channelid, url, interval, name) {
   let nick = name || `pinger`
   let id = channelid
-  if (!isNaN(id)) {
+  if (isNaN(id)) {
     log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` not a valid channel number  ['`+ chalk.green(id) + `']`)
   return;
   }
