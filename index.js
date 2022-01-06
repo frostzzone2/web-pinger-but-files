@@ -37,6 +37,7 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
       
     status = response.status;
   }
+
 const ping = async function(url, interval, logs, name) {
   let nick = name || `pinger`
   if (logs == false) {
@@ -90,6 +91,56 @@ const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-ping
 
 }
 
+const pingd = async function(channelid, url, interval, name) {
+  let nick = name || `pinger`
+  let id = channelid
+  if (!isNaN(id)) {
+    log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` not a valid channel number  ['`+ chalk.green(id) + `']`)
+  return;
+  }
+  clog = true
+  
+if(!url) return client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `invalid URL supplied [`+ url +`]`)});
+
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+    } catch (_) {
+      return false;  
+    }
+
+    return true;
+  }
+
+  if(isValidUrl(url) !== true || url.includes("<" || ">" || "<script>" || "</script>") || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) return client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Invalid URL (${url})!`)});
+
+let int = interval || 60000
+
+setInterval(async () => {
+    const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+     if(clog == true){
+      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
+       }
+    });
+  if(clog == true){
+      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
+}
+    status = response.status;
+}, int);
+
+const response = await fetch(url, {headers: {'User-Agent' : 'simple-website-pinger (NPM Package)'}}).catch(err => {
+  if(clog == true){
+      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] Error: ` + `Failed to ping ${url}: ${err}`)});
+    }
+    });
+  if(clog == true){
+      client.channels.cache.get(id).send({content: String(`[📡 simple-website-pinger] ` + `Successfully pinged ${url} with status ${response.status} (${response.statusText})`)});
+    }
+
+    status = response.status;
+
+}
+
 
 const webserver =  async function(port, text) {
 let status = 200 
@@ -127,5 +178,6 @@ log(chalk.green(`[📡 simple-website-pinger] `) + `Webserver is listening on po
 module.exports = {
 pong,
 ping,
+pingd,
 webserver
 }
