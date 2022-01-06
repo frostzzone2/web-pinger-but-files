@@ -97,7 +97,7 @@ const pingd = async function(client, channelid, url, interval, name) {
 bot = client
   let nick = name || `pinger`
   let chanid = channelid
-  if (isNaN(id)) {
+  if (isNaN(chanid)) {
     log(chalk.gray.bgWhite(`[📡 simple-website-pinger]`) + ` not a valid channel number  ['`+ chalk.green(id) + `']`)
   return;
   }
